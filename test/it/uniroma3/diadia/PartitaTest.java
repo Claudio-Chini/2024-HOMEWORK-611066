@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import it.uniroma3.ambienti.Labirinto;
-import it.uniroma3.ambienti.Stanza;
-import it.uniroma3.giocatore.Giocatore;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.giocatore.Giocatore;
 
 
 public class PartitaTest {

@@ -1,10 +1,10 @@
 package it.uniroma3.diadia;
 
 
-import java.util.Scanner;
 
-import it.uniroma3.ambienti.Stanza;
-import it.uniroma3.attrezzi.Attrezzo;
+
+import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 
 
@@ -44,12 +44,14 @@ public class DiaDia {
 
 	public void gioca() {
 		String istruzione; 
+
+
 		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 			
 		do		
 			istruzione = io.leggiRiga();
 		while (!processaIstruzione(istruzione));
-		
+
 	}   
 
 

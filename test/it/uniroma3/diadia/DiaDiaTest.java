@@ -5,8 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import it.uniroma3.attrezzi.Attrezzo;
-import it.uniroma3.giocatore.Borsa;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class DiaDiaTest {
 
     private DiaDia diaDia;
