@@ -3,6 +3,9 @@ package it.uniroma3.diadia;
 
 
 
+import it.uiroma3.diadia.comandi.Comando;
+import it.uiroma3.diadia.comandi.FabbricaDiComandi;
+import it.uiroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -35,9 +38,9 @@ public class DiaDia {
 	
 
 	private Partita partita;
-	private IOConsole io;
+	private IO io;
 
-	public DiaDia(IOConsole console) {
+	public DiaDia(IO console) {
 		this.io =  console;
 		this.partita = new Partita();
 	}
@@ -66,9 +69,9 @@ public class DiaDia {
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
-			System.out.println("Hai vinto!");
+			io.mostraMessaggio("Hai vinto!");
 		if (this.partita.getGiocatore().getCfu()<=0)
-			System.out.println("Hai esaurito i CFU...");
+			io.mostraMessaggio("Hai esaurito i CFU...");
 
 		return this.partita.isFinita();
 		}
@@ -80,7 +83,7 @@ public class DiaDia {
 	}
 
 	public static void main(String[] argc) {
-		IOConsole console = new IOConsole();
+		IO console = new IOConsole();
 		DiaDia gioco = new DiaDia(console);
 		gioco.gioca();
 	}

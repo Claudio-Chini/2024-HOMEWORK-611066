@@ -34,6 +34,7 @@ public class Borsa {
 	 * Aggiunge l'attrezzo passato come parametro alla borsa  
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
+		if(attrezzo==null)return false;
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
 		if (this.numeroAttrezzi==10)
@@ -84,39 +85,40 @@ public class Borsa {
 	 * parametro e' presente nella borsa
 	 */
 		public boolean hasAttrezzo(String nomeAttrezzo) {
-			return this.getAttrezzo(nomeAttrezzo)!=null;
+			if(this.getAttrezzo(nomeAttrezzo)!=null)
+				return true;
+			else
+				return false;
+			//return this.getAttrezzo(nomeAttrezzo)!=null;
 		}
 		
 	/**
 	 * Rimuove un attrezzo dalla Borsa e ne ritorna il riferimento
 	 */
 		
-		public Attrezzo removeAttrezzo(String nomeAttrezzo) {
-			
-			// ---> TODO (implementare questo metodo) <---
-			if(nomeAttrezzo != "") {
-				Attrezzo a = null;
-				Attrezzo[] attrezzi_temp = new Attrezzo[10];
-				if(this.hasAttrezzo(nomeAttrezzo)!= false) {
-					int i=0;
-					for (Attrezzo attrezzo : this.attrezzi) {
-						if(attrezzo != null) {
-							if (attrezzo.getNome() == nomeAttrezzo) {
-								a = attrezzo;
-								
-							}else { 
-								attrezzi_temp[i] = attrezzo;
-								i++;
-							}
-						}
+	/**
+	 * Rimuove un attrezzo dalla stanza (ricerca in base al nome).
+	 * @param nomeAttrezzo
+	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
+	 */
+	public boolean removeAttrezzo(Attrezzo attrezzo) {
+		if(attrezzo!=null){
+			int i = 0;
+			for(Attrezzo a : this.attrezzi) {
+				if(a != null) {
+					if(a.getNome().equals(attrezzo.getNome())) {
+						this.attrezzi[i] = null;
+						this.numeroAttrezzi--;
 					}
-					
-				this.attrezzi = attrezzi_temp;	
 				}
-				
-				return a;
-			}else return null;
+				i++;
+
+			}
+			return true;
 		}
+		else
+			return false;
+	}
 		
 	/**
 	 * Restituisce una rapresentazione stringa di questa borsa 

@@ -10,10 +10,6 @@ public class DiaDiaTest {
 
     private DiaDia diaDia;
 
-    public DiaDia diaDia() {
-        this.diaDia = new DiaDia(new IOConsole());
-        return this.diaDia;
-    }
  
     // test prendi()
         /**
