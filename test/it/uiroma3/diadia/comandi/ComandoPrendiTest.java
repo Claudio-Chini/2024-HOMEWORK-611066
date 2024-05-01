@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import it.uiroma3.diadia.comandi.ComandoPrendi;
+
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Stanza;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPrendiTest {

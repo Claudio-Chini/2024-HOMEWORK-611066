@@ -6,8 +6,7 @@ package it.uniroma3.diadia;
 import it.uiroma3.diadia.comandi.Comando;
 import it.uiroma3.diadia.comandi.FabbricaDiComandi;
 import it.uiroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
-import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
+
 
 
 
