@@ -15,8 +15,6 @@ public class ComandoPrendiTest {
 	public void testEsegui() {
 		Partita p = new Partita();
 		p.getStanzaCorrente().addAttrezzo(new Attrezzo("Martello",5));
-		
-		
 		ComandoPrendi comando = new ComandoPrendi();
 		comando.setParametro("Martello");
 		comando.esegui(p);

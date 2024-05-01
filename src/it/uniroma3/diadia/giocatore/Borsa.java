@@ -109,12 +109,13 @@ public class Borsa {
 					if(a.getNome().equals(attrezzo.getNome())) {
 						this.attrezzi[i] = null;
 						this.numeroAttrezzi--;
+						return true;
 					}
 				}
 				i++;
 
-			}
-			return true;
+			}return false;
+			
 		}
 		else
 			return false;

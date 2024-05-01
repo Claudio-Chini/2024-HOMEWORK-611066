@@ -4,7 +4,7 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPosa implements Comando {
-	private Partita partita = new Partita();
+	
 	private String nomeAttrezzo;
 	
 	/**
@@ -13,9 +13,9 @@ public class ComandoPosa implements Comando {
 	 */
 	@Override
 	public void esegui(Partita partita) {
-		Attrezzo attrezzo_posato = this.partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
-		this.partita.getGiocatore().getBorsa().removeAttrezzo(this.partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo));
-		this.partita.getStanzaCorrente().addAttrezzo(attrezzo_posato);
+		Attrezzo attrezzo_posato = partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
+		partita.getGiocatore().getBorsa().removeAttrezzo(partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo));
+		partita.getStanzaCorrente().addAttrezzo(attrezzo_posato);
 
 	}
 

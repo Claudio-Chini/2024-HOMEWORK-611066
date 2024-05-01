@@ -4,7 +4,7 @@ import it.uniroma3.diadia.Partita;
 
 
 public class ComandoPrendi implements Comando {
-	private Partita partita = new Partita();
+
 	private String nomeAttrezzo;
 
 	/**
@@ -13,13 +13,10 @@ public class ComandoPrendi implements Comando {
 	 */
 	@Override
 	public void esegui(Partita partita) {
-		System.out.println(partita.getStanzaCorrente().hasAttrezzo(nomeAttrezzo));
-		if(partita.getStanzaCorrente().hasAttrezzo(nomeAttrezzo)==false)System.out.println("Attrezzo non presente nella stanza");
-		System.out.println(partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo));
-		this.partita.getGiocatore().getBorsa().addAttrezzo(partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo));
-		System.out.println(this.partita.getGiocatore().getBorsa());
-		System.out.println(this.partita.getGiocatore().getBorsa().hasAttrezzo(nomeAttrezzo));
-		this.partita.getStanzaCorrente().removeAttrezzo(partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo));
+		
+		if(partita.getStanzaCorrente().hasAttrezzo(nomeAttrezzo)==false)return;
+		partita.getGiocatore().getBorsa().addAttrezzo(partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo));
+		partita.getStanzaCorrente().removeAttrezzo(partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo));
 		
 
 	}

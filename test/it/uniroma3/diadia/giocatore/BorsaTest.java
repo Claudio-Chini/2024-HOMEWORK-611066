@@ -41,18 +41,11 @@ public class BorsaTest {
 		 * Test addAttrezzo(Attrezzo a) nel caso di parametro nullo
 		 */
 		 
-		@Test (expected = NullPointerException.class) // JUnit4
-		public void testAddAttrezzoParametroNulloJU4() {
-			borsa(10,null,null).addAttrezzo(null);	
-		}
-		
-		/* JUnit5
 		@Test 
-		public void testAddAttrezzoParametroNullo() {
-		
-			assertThrows(NullPointerException.class,() -> borsa(10,null,null).addAttrezzo(null) );
+		public void testAddAttrezzoParametroNulloJU4() {
+			assertEquals(false,borsa(10,null,null).addAttrezzo(null));	
 		}
-		  */
+		
 		
 		/**
 		 * Test addAttrezzo(Attrezzo a) senza superare il peso massimo della borsa
@@ -91,7 +84,7 @@ public class BorsaTest {
 		@Test 
 		public void testRemoveAttrezzoParametroNullo() {
 		
-			assertEquals(null, borsa(10,new Attrezzo("a1",1),null).removeAttrezzo("") );
+			assertEquals(false, borsa(10,new Attrezzo("a1",1),null).removeAttrezzo(new Attrezzo("",1)) );
 		}
 
 		/**
@@ -99,7 +92,7 @@ public class BorsaTest {
 		 */
 		@Test
 		public void testRemoveAttrezzoBorsaVuota() {
-			assertEquals(null,borsa(10,null,null).removeAttrezzo((new Attrezzo("a1",1)).getNome()));
+			assertEquals(false,borsa(10,null,null).removeAttrezzo((new Attrezzo("a1",1))));
 		}
 		
 		/**
@@ -107,7 +100,7 @@ public class BorsaTest {
 		*/
 		@Test
 		public void testRemoveAttrezzoNonPresenteInBorsa() {
-			assertEquals(null,borsa(10,new Attrezzo("a1",1),new Attrezzo("a2",1)).removeAttrezzo(new Attrezzo("a3",1).getNome()));
+			assertEquals(false,borsa(10,new Attrezzo("a1",1),new Attrezzo("a2",1)).removeAttrezzo(new Attrezzo("a3",1)));
 		}
 		
 		/**
@@ -116,7 +109,7 @@ public class BorsaTest {
 		@Test
 		public void testRemoveAttrezzoPresenteInBorsa() {
 			Attrezzo a1 = new Attrezzo("a1",1);
-			assertEquals(a1,borsa(10,a1,new Attrezzo("a2",1)).removeAttrezzo(a1.getNome()));
+			assertEquals(true,borsa(10,a1,new Attrezzo("a2",1)).removeAttrezzo(a1));
 			
 		}
 
