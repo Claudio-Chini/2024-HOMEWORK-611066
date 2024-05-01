@@ -1,10 +1,11 @@
 package it.uiroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 
 public class ComandoPrendi implements Comando {
-
+	private IO io;
 	private String nomeAttrezzo;
 
 	/**
@@ -36,6 +37,10 @@ public class ComandoPrendi implements Comando {
 	@Override
 	public String getParametro() {
 		return this.nomeAttrezzo;
+	}
+			@Override
+	public void setIO(IO io){
+		this.io = io;
 	}
 
 }

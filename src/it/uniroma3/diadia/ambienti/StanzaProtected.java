@@ -137,7 +137,6 @@ public class StanzaProtected{
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		if(this.attrezzi==null){
-			System.out.println("nessun attrezzo presente nella stanza");
 			return null;
 		}
 		Attrezzo attrezzoCercato;
