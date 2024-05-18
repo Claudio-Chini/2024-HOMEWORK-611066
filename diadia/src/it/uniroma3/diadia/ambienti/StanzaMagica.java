@@ -23,6 +23,12 @@ public class StanzaMagica extends Stanza {
             return super.addAttrezzo(attrezzo); // tramite super si fa riferimento al metodo della superclasse Stanza
         }
 
+        public boolean isMagica() {
+            if(this.getClass() == StanzaMagica.class){
+            return true;
+            }return false;
+        }
+
 
         private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
             StringBuilder nomeInvertito;

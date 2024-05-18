@@ -14,7 +14,7 @@ public class ComandoPosaTest {
 	@Test
 	public void testEsegui() {
 		Attrezzo a = new Attrezzo("a",1);
-		Stanza s = new Stanza("s");
+		Stanza s = new Stanza("s","s");
 		Partita p = new Partita();
 		p.setStanzaCorrente(s);
 		Giocatore g = p.getGiocatore();

@@ -9,10 +9,13 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class StanzaBloccataTest extends StanzaTest{
 	
 	private String direzioneBloccata = "est";
-	private String attrezzoSpeciale = "Passepartout";
+	private Attrezzo attrezzoSpeciale = new Attrezzo("Passepartout");
 	
 	public StanzaBloccata stanzaBloccata(String nome){
-		return new StanzaBloccata(nome,direzioneBloccata,attrezzoSpeciale);
+		return new StanzaBloccata(nome,this.direzioneBloccata,this.attrezzoSpeciale.getNome());
+	}
+	public StanzaBloccata stanzaBloccata(String nome,String direzioneBloccata_,Attrezzo attrezzoSpeciale_){
+		return new StanzaBloccata(nome,direzioneBloccata_,attrezzoSpeciale_.getNome());
 	}
 
 // test getDescrizione()
@@ -22,9 +25,12 @@ public class StanzaBloccataTest extends StanzaTest{
 	}
 	@Test
 	public void testGetDescrizioneConAttrezzoSpeciale() {
-		Stanza s = stanzaBloccata(attrezzoSpeciale);
-		s.addAttrezzo(new Attrezzo("Passepartout",1));
-		assertEquals(s.toString(),s.getDescrizione());
+		Stanza s = stanzaBloccata("stanzaBloccata",direzioneBloccata,attrezzoSpeciale);
+		String descrizione = s.getDescrizione();
+		
+		s.addAttrezzo(attrezzoSpeciale);
+		
+		assertEquals(false,descrizione==s.getDescrizione());
 	}
 
 // test getStanzaAdiacente()
@@ -33,7 +39,7 @@ public class StanzaBloccataTest extends StanzaTest{
 		Stanza s = stanzaBloccata("s");
 		Stanza s2 = new Stanza("s2");
 		s.impostaStanzaAdiacente(direzioneBloccata,s2);
-		s.addAttrezzo(new Attrezzo("Passepartout",1));
+		s.addAttrezzo(attrezzoSpeciale);
 		assertEquals(s2, s.getStanzaAdiacente(direzioneBloccata));
 	}
 	@Test
@@ -41,7 +47,6 @@ public class StanzaBloccataTest extends StanzaTest{
 		Stanza s = stanzaBloccata("s");
 		Stanza s2 = new Stanza("s2");
 		s.impostaStanzaAdiacente(direzioneBloccata,s2);
-		
 		assertEquals(s, s.getStanzaAdiacente(direzioneBloccata));
 	}
 

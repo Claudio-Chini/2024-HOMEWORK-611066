@@ -22,8 +22,8 @@ public class LabirintoTest {
     }
     public Labirinto labirinto(Stanza entrata, Stanza uscita){
         this.labirinto = new Labirinto();
-        this.labirinto.setEntrata(entrata);
-        this.labirinto.setUscita(uscita);
+        this.labirinto.setStanzaCorrente(entrata);
+        this.labirinto.setStanzaVincente(uscita);
         return this.labirinto;
     }
 
@@ -34,9 +34,10 @@ public class LabirintoTest {
             ** Test getEntrata() 
             */
             @Test
-            public void testGetEntrata() {  
-                labirinto(entrata(new Stanza("e")),new Stanza("uscita"));
-                assertEquals(entrata,labirinto.getEntrata());
+            public void testGetEntrata() { 
+                entrata(new Stanza("e"));
+                labirinto(entrata,null); 
+                assertEquals(entrata,labirinto.getStanzaIniziale());
             }
 // test getUscita()
         
@@ -46,7 +47,7 @@ public class LabirintoTest {
             @Test
             public void testGetUscita() {  
                 labirinto(new Stanza("entrata"),uscita(new Stanza("u")));
-                assertEquals(uscita,labirinto.getUscita());
+                assertEquals(uscita,labirinto.getStanzaVincente());
             }
 // test setEntrata()
             
@@ -55,8 +56,8 @@ public class LabirintoTest {
             */
             @Test
             public void testSetEntrata() {  
-                labirinto(null,uscita(new Stanza("uscita"))).setEntrata(entrata(new Stanza("entrata")));
-                assertEquals(entrata,labirinto.getEntrata());
+                labirinto(null,uscita(new Stanza("uscita"))).setStanzaCorrente(entrata(new Stanza("entrata")));
+                assertEquals(entrata,labirinto.getStanzaIniziale());
             }
 
 // test setUscita()
@@ -66,8 +67,8 @@ public class LabirintoTest {
                 */
                 @Test
                 public void testSetUscita() {  
-                    labirinto(new Stanza("entrata"),null).setUscita(uscita(new Stanza("uscita")));
-                    assertEquals(uscita,labirinto.getUscita());
+                    labirinto(new Stanza("entrata"),null).setStanzaVincente(uscita(new Stanza("uscita")));
+                    assertEquals(uscita,labirinto.getStanzaVincente());
                 }
 
             

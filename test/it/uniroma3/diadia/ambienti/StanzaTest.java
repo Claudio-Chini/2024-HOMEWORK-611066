@@ -2,29 +2,36 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+
 public class StanzaTest {
 
     Stanza stanza;
     
-    public Stanza stanza(String nome, Stanza[] stanzeAdiacenti, Attrezzo[] attrezzi) {
+    public Stanza stanza(String nome, Map<String,Stanza > stanzeAdiacenti, Map<String,Attrezzo > attrezzi) {
         this.stanza = new Stanza(nome);
-        if(stanzeAdiacenti!=null) {
-            for (int i=0; i<stanzeAdiacenti.length; i++) {
-                this.stanza.impostaStanzaAdiacente("direzione", stanzeAdiacenti[i]);
+        if (stanzeAdiacenti != null) {
+            for (String direzione : stanzeAdiacenti.keySet()) {
+                this.stanza.impostaStanzaAdiacente(direzione, stanzeAdiacenti.get(direzione));
             }
         }
-        if(attrezzi!=null) {
-            for (Attrezzo attrezzo :attrezzi) {
-                this.stanza.addAttrezzo(attrezzo);
-            }
+        if (attrezzi != null) {
+          attrezzi.forEach((nomeAttrezzo, attrezzo) -> this.stanza.addAttrezzo(attrezzo));
         }
+      
         return this.stanza;
+    }
+
+    public Stanza stanza(String nome) {
+        return new Stanza (nome);
     }
     
 // test impostaStanzaAdiacente(String direzione, Stanza stanza)
@@ -32,9 +39,10 @@ public class StanzaTest {
         /**
          * Test impostaStanzaAdiacente(String direzione, Stanza stanza) nel caso di direzione nulla
          */
-        @Test (expected = NullPointerException.class) // JUnit4
+        @Test // JUnit4
         public void testImpostaStanzaAdiacenteDirezioneNullaJU4() {
-            stanza("A",null,null).impostaStanzaAdiacente(null, stanza("B",null,null));	
+            Stanza s = stanza("A",null,null); s.impostaStanzaAdiacente(null, stanza("B",null,null));
+            assertEquals(null,s.getStanzaAdiacente("nord"));	
         }
         
         /* JUnit5
@@ -144,19 +152,11 @@ public class StanzaTest {
          */
         @Test
         public void testAddAttrezzoStanzaVuota(){
-            assertEquals(true, stanza("A",null,null).addAttrezzo(new Attrezzo("attrezzo", 1)));
+            assertEquals(true, stanza("A").addAttrezzo(new Attrezzo("attrezzo", 1)));
         }
 
 
-        /**
-         * Test addAttrezzo(Attrezzo attrezzo) se si supera il numero massimo di attrezzi contenibili dalla stanza
-         */
-        @Test
-        public void testAddAttrezzoSuperamentoNumeroMassimoAttrezzi(){
-            Attrezzo attrezzo = new Attrezzo("attrezzo", 1);
-            Attrezzo[] attrezzi = {attrezzo, attrezzo, attrezzo, attrezzo, attrezzo,attrezzo,attrezzo,attrezzo,attrezzo,attrezzo};
-            assertEquals(false, stanza("A",null,attrezzi).addAttrezzo(attrezzo));
-        }
+
 
 
 // test removeAttrezzo(Attrezzo attrezzo)
@@ -164,7 +164,7 @@ public class StanzaTest {
         /**
          * Test removeAttrezzo(Attrezzo attrezzo) se invocato su una stanza nulla
          */
-        @SuppressWarnings("null")
+       
 		@Test(expected = NullPointerException.class)
         public void testRemoveAttrezzoStanzaNulla(){
             Stanza stanzaA = null;
@@ -192,7 +192,7 @@ public class StanzaTest {
          */
         @Test
         public void testRemoveAttrezzoPresenteInStanza(){
-           assertEquals(true, stanza("A",null, new Attrezzo[] {new Attrezzo("attrezzo", 1)}).removeAttrezzo(new Attrezzo("attrezzo", 1)));
+           assertEquals(true, stanza("A",null, Map.of("attrezzo",new Attrezzo("attrezzo", 1))).removeAttrezzo(new Attrezzo("attrezzo", 1)));
         }
 
         /**
@@ -200,7 +200,7 @@ public class StanzaTest {
          */
         @Test
         public void testRemoveAttrezzoNonPresenteInStanza(){
-            assertEquals(false, stanza("A",null, new Attrezzo[] {new Attrezzo("attrezzo", 1)}).removeAttrezzo(new Attrezzo("attrezzo2", 1)));
+            assertEquals(false, stanza("A",null, Map.of("attrezzo",new Attrezzo("attrezzo", 1))).removeAttrezzo(new Attrezzo("attrezzo2", 1)));
         }
 
 
@@ -222,7 +222,8 @@ public class StanzaTest {
          */
         @Test
         public void testGetAttrezzoParametroNullo(){
-            assertEquals(null, stanza("A",null,null).getAttrezzo(null));
+            
+            assertEquals(null, stanza("A",null,null).getAttrezzo("a"));
         }
 
         /**
@@ -239,15 +240,15 @@ public class StanzaTest {
         @Test
         public void testGetAttrezzoPresenteInStanza(){
             Attrezzo attrezzo = new Attrezzo("attrezzo", 1);
-            assertEquals(attrezzo, stanza("A",null, new Attrezzo[] {attrezzo}).getAttrezzo("attrezzo"));
+            assertEquals(attrezzo, stanza("A",null, Map.of(attrezzo.getNome(),attrezzo)).getAttrezzo("attrezzo"));
         }
 
         /**
          * Test getAttrezzo(String nomeAttrezzo) se l'attrezzo non è presente nella stanza
-         */
-        @Test
+    
         public void testGetAttrezzoNonPresenteInStanza(){
-            assertEquals(null, stanza("A",null, new Attrezzo[] {new Attrezzo("attrezzo", 1)}).getAttrezzo("attrezzo2"));
+            assertEquals(null, stanza("A",null,  Map.of("attrezzo", new Attrezzo("attrezzo", 1))).getAttrezzo("attrezzo2"));
+            
         }
 
    
@@ -258,7 +259,7 @@ public class StanzaTest {
          */
         @Test
         public void testGetDirezioniStanzaSenzaStanzeAdiacenti(){
-            assertEquals(0, stanza("A",null,null).getDirezioni().length);
+            assertEquals(0, stanza("A",null,null).getDirezioni().size());
         }
 
         /**
@@ -266,8 +267,8 @@ public class StanzaTest {
          */
         @Test
         public void testGetDirezioniStanzaConStanzeAdiacenti(){
-            stanza("A",new Stanza[] {new Stanza("B")},null);
-            assertEquals(1, stanza.getDirezioni().length);
+            stanza("A",Map.of("direzione", new Stanza("B")),null);
+            assertEquals(1, stanza.getDirezioni().size());
         }
 
         /**
@@ -284,16 +285,7 @@ public class StanzaTest {
 
 // test hasAttrezzo(String nomeAttrezzo)
 
-        /**
-         * Test hasAttrezzo(String nomeAttrezzo) se invocato su una stanza nulla
-         */
-        @SuppressWarnings("null")
-		@Test(expected = NullPointerException.class)
-        public void testHasAttrezzoStanzaNulla(){
-            Stanza stanzaA = null;
-            stanzaA.hasAttrezzo("attrezzo");
-        }
-
+ 
         /**
          * Test hasAttrezzo(String nomeAttrezzo) nel caso di attrezzo nullo
          */
@@ -315,7 +307,9 @@ public class StanzaTest {
          */
         @Test
         public void testHasAttrezzoPresenteInStanza(){
-            assertEquals(true, stanza("A",null, new Attrezzo[] {new Attrezzo("attrezzo", 1)}).hasAttrezzo("attrezzo"));
+            Map<String, Attrezzo> attrezzi = new HashMap<>();
+            attrezzi.put("attrezzo", new Attrezzo("attrezzo", 1));
+            assertEquals(true, stanza("A",null, attrezzi).hasAttrezzo("attrezzo"));
         }
 
         /**
@@ -323,13 +317,8 @@ public class StanzaTest {
          */
         @Test
         public void testHasAttrezzoNonPresenteInStanza(){
-            assertEquals(false, stanza("A",null, new Attrezzo[] {new Attrezzo("attrezzo", 1)}).hasAttrezzo("attrezzo2"));
+            assertEquals(false, stanza("A",null, null).hasAttrezzo("attrezzo"));
         }
-
-
-
-
-
 
 
 

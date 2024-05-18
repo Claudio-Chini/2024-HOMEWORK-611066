@@ -2,6 +2,7 @@ package it.uiroma3.diadia.comandi;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 
 public class ComandoPrendi implements Comando {
