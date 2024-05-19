@@ -90,19 +90,31 @@ public class Labirinto {
     public Stanza getStanzaCorrente() {
     	return this.stanzaCorrente;
     }
+	
 	public Stanza getStanzaIniziale() {
 		return this.stanzaIniziale;
 	}
     public Stanza getStanzaVincente() {
     	return this.stanzaVincente;
+
     }
-    public void setStanzaIniziale(Stanza entrata) {
-    	this.stanzaIniziale = entrata;
-    }
+  
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
 		this.stanzaCorrente = stanzaCorrente;
 	}
 	public void setStanzaVincente(Stanza uscita) {
 		this.stanzaVincente = uscita;
 	}
+
+
+
+
+	public static LabirintoBuilder newBuilder() {
+		return new LabirintoBuilder();
+		
+	}
+
+    public void setStanzaIniziale(Stanza i) {
+		this.stanzaCorrente = i;
+    }
 }

@@ -27,7 +27,7 @@ private String direzione;
 			return;
 		}
 		partita.setStanzaCorrente(prossimaStanza);
-		io.mostraMessaggio(partita.getStanzaCorrente().getNome());
+		io.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu() - 1);
 	}
 	

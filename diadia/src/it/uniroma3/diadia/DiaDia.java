@@ -40,7 +40,7 @@ public class DiaDia {
 	public DiaDia(IO io){
 		this.io = io;
 	}
-	public DiaDia(Labirinto labirinto,IO io) {
+	public DiaDia(IO io,Labirinto labirinto) {
 		this.io =  io;
 		this.partita = new Partita(labirinto);
 	}
@@ -81,12 +81,13 @@ public class DiaDia {
 
 		Labirinto labirinto = new LabirintoBuilder()
 		.addStanzaIniziale("Atrio")
+		.addAttrezzo("lanterna", 2)
 		.addStanzaVincente("Biblioteca")
 		.addAdiacenza("Atrio",  "Biblioteca","ovest")
 		.getLabirinto();
 
 
-		DiaDia gioco = new DiaDia(labirinto, io);
+		DiaDia gioco = new DiaDia( io,labirinto);
 		gioco.gioca()    ;
 	}
 }

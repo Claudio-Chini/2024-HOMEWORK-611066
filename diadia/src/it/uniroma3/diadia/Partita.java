@@ -51,7 +51,7 @@ public class Partita {
 	}
 
 	public Stanza getStanzaCorrente() {
-		return this.labirinto.getStanzaCorrente();
+		return this.getLabirinto().getStanzaCorrente();
 	}
 	
 	/**
@@ -88,5 +88,9 @@ public class Partita {
 	
 	public Giocatore getGiocatore() {
 		return this.giocatore;
+	}
+
+	public Labirinto getLabirinto(){
+		return this.labirinto;
 	}
 }

@@ -28,4 +28,8 @@ public class ComandoPosaTest {
 		assertEquals(true,s.hasAttrezzo("a"));
 	}
 
+
+	
+	
+
 }

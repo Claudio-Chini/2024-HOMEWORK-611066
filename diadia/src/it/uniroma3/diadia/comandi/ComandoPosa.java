@@ -15,8 +15,9 @@ public class ComandoPosa implements Comando {
 	@Override
 	public void esegui(Partita partita) {
 		Attrezzo attrezzo_posato = partita.getGiocatore().getBorsa().getAttrezzo(attrezzo);
-		partita.getGiocatore().getBorsa().removeAttrezzo(partita.getGiocatore().getBorsa().getAttrezzo(attrezzo));
 		partita.getStanzaCorrente().addAttrezzo(attrezzo_posato);
+		partita.getGiocatore().getBorsa().removeAttrezzo(partita.getGiocatore().getBorsa().getAttrezzo(attrezzo));
+		
 
 	}
 
@@ -39,6 +40,10 @@ public class ComandoPosa implements Comando {
 	@Override
 	public void setIO(IO io){
 		this.io = io;
+	}
+
+	public Object getIO() {
+		return this.io;
 	}
 
 
