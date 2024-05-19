@@ -1,13 +1,21 @@
-package it.uiroma3.diadia.comandi;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoNonValido implements Comando {
+public class ComandoAiuto implements Comando {
+	
 	private IO io;
+	
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
+	/**
+	 * Stampa informazioni di aiuto.
+	 */
 	@Override
 	public void esegui(Partita partita) {
-		io.mostraMessaggio("Comando non valido!");
+		for(int i=0; i< elencoComandi.length; i++) 
+			io.mostraMessaggio(elencoComandi[i]+" ");
+		io.mostraMessaggio("");
 
 	}
 
@@ -19,14 +27,14 @@ public class ComandoNonValido implements Comando {
 
 	@Override
 	public String getNome() {
-		return "comando non valido";
+		return "aiuto";
 	}
 
 	@Override
 	public String getParametro() {
 		return "";
 	}
-		@Override
+	@Override
 	public void setIO(IO io){
 		this.io = io;
 	}

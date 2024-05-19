@@ -1,68 +1,87 @@
 package it.uniroma3.diadia;
 
-
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
+/*
+ * Classe che simula gli input da dare al gioco e raccoglie gli output restituiti da esso.
+ * Utile per fare test. Implementa l'interfaccia IO.
+ */
 
 public class IOSimulator implements IO {
-
-	private List<String> righeLette;
-	private int indiceRigheLette;
-	private Map<String, String> messaggiProdotti;
-	private int indiceMessaggiProdotti;
-	private int indiceMessaggiMostrati;
-
-	public List<String> getRigheLette() {
-		return righeLette;
-	}
-
-	public void setMessaggiProdotti(Map<String,String> messaggiProdotti) {
-		this.messaggiProdotti = messaggiProdotti;
-	}
-
-
-	//forse si potrebbe inserire una mappa al posto della lista per ricordare ogni riga letta quale messaggi abbia prodotto
-
-	//private List<String> messaggiProdotti;
 	
-
-
-	public Map<String, String> getMessaggiProdotti() {
-		return messaggiProdotti;
+	private List<String> inputList;
+	private Iterator<String> itInput;
+	private List<String> outputList;
+	
+	/*
+	 * Costruttore che crea un simulatore di IO
+	 * con comando nullo.
+	 */
+	
+	public IOSimulator() {
+		this.inputList = new ArrayList<String>();
+		//this.inputList.add("Giocatore Simulato");
+		this.itInput = this.inputList.iterator();
+		this.outputList = new ArrayList<String>();
 	}
-
-
-	public IOSimulator(List<String> righeDaLeggere) {
-		this.righeLette = righeDaLeggere;
-		this.indiceRigheLette = 0;
-		this.indiceMessaggiMostrati = 0;
-		this.messaggiProdotti = new HashMap<String,String>();
+	
+	/*
+	 * Costruttore che crea un simulatore di IO che accetta come parametro una lista di
+	 * input di tipo String
+	 * @param listaInput Lista di input (List<String>)
+	 */
+	
+	public IOSimulator(List<String> listaInput) {
+		//this.inputList.add("Giocatore Simulato");
+		this.inputList.addAll(listaInput);
+		this.itInput = inputList.iterator();
+		this.outputList = new ArrayList<String>();
 	}
-
-	@Override
-	public String leggiRiga() {
-		String riga = null;
-
-		riga = this.righeLette.get(indiceRigheLette);
-		this.indiceRigheLette++;
-		return riga;
+	
+	public Iterator<String> getIterator(){
+		return itInput;
 	}
-
+	
+	public void setListaInput(List<String> listaInput) {
+		this.inputList = listaInput;
+//		System.out.println(this.inputList);
+		this.itInput = inputList.iterator();
+	}
+	
+	public void setListaInputSenzaNome(List<String> listaInput) {
+		this.inputList = listaInput;
+		this.itInput = inputList.iterator();
+	}
+	
+	public List<String> getInputList(){
+		return inputList;
+	}
+	
+	public List<String> getOutputList(){
+		return outputList;
+	}
+	
+	/*
+	 * Metodo polimorfo che aggiunge ad una lista l'output corrente generato dal gioco
+	 */
+	
 	@Override
 	public void mostraMessaggio(String msg) {
-		this.messaggiProdotti.put(righeLette.get(indiceRigheLette-1), msg);
-		this.indiceMessaggiProdotti++;
+		this.outputList.add(msg);
 	}
-
-	public String nextMessaggio() {
-		String next = this.messaggiProdotti.get(indiceMessaggiMostrati);
-		this.indiceMessaggiMostrati++;
-		return next;
+	
+	/*
+	 * Metodo che legge i comandi dalla lista di input e li fornisce al gioco.
+	 * Se la lista di comandi � vuota o si � arrivati all fine di essa, viene
+	 * messo in coda un ultimo comando "fine" in modo da fermare il gioco
+	 */
+	@Override
+	public String leggiRiga() {
+		if(itInput.hasNext()) 
+			return itInput.next();
+		return "fine";
+		// Per motivi di precauzione l'ultimo input è sempre fine
 	}
-
-	public boolean hasNextMessaggio() {
-		return this.indiceMessaggiMostrati < this.indiceMessaggiProdotti;
-	}
-
 }

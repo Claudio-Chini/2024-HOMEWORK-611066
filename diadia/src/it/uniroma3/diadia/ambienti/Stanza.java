@@ -153,6 +153,7 @@ public class Stanza{
      * @return la descrizione della stanza
      */
 	public String getDescrizione() {
+		if(this.descrizione == null) return this.toString();
 		return this.descrizione;
 	}
 

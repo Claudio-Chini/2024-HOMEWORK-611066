@@ -1,17 +1,13 @@
-package it.uiroma3.diadia.comandi;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoFine implements Comando {
+public class ComandoNonValido implements Comando {
 	private IO io;
-	
-	/**
-	 * Comando "Fine".
-	 */
 	@Override
 	public void esegui(Partita partita) {
-		io.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
+		io.mostraMessaggio("Comando non valido!");
 
 	}
 
@@ -23,7 +19,7 @@ public class ComandoFine implements Comando {
 
 	@Override
 	public String getNome() {
-		return "fine";
+		return "comando non valido";
 	}
 
 	@Override

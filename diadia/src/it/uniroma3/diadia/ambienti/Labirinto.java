@@ -5,8 +5,9 @@ import java.util.Set;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Labirinto {
-	private Stanza entrata;
-	private Stanza uscita;
+	private Stanza stanzaIniziale;
+	private Stanza stanzaCorrente;
+	private Stanza stanzaVincente;
 
 	
 	Set<Stanza> stanze ;	
@@ -17,8 +18,8 @@ public class Labirinto {
 	
 	
 	public Labirinto() {
-
-		creaStanze();
+		this.stanze = new HashSet<Stanza>();
+		this.attrezzi = new HashSet<Attrezzo>();
 	}
 	
 
@@ -27,12 +28,14 @@ public class Labirinto {
 	   /**
      * Crea tutte le stanze e le porte di collegamento
      */
+
+	/* 
     private void creaStanze() {
 
 		Set<Stanza> stanze = new HashSet<Stanza>();
 		Set<Attrezzo> attrezzi = new HashSet<Attrezzo>();
 
-		/* crea stanze del labirinto */
+		// crea stanze del labirinto 
 		Stanza atrio = new Stanza("Atrio");
 		Stanza aulaN11 = new Stanza("Aula N11");
 		Stanza aulaN10 = new Stanza("Aula N10");
@@ -40,7 +43,7 @@ public class Labirinto {
 		Stanza biblioteca = new Stanza("Biblioteca");
 
 		
-		/* crea gli attrezzi */
+		// crea gli attrezzi
     	Attrezzo lanterna = new Attrezzo("lanterna",3);
 		Attrezzo osso = new Attrezzo("osso",1);
 
@@ -55,7 +58,7 @@ public class Labirinto {
 
 		
 		
-		/* collega le stanze */
+		// collega le stanze 
 		atrio.impostaStanzaAdiacente("nord", biblioteca);
 		atrio.impostaStanzaAdiacente("est", aulaN11);
 		atrio.impostaStanzaAdiacente("sud", aulaN10);
@@ -69,7 +72,7 @@ public class Labirinto {
 		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
 		biblioteca.impostaStanzaAdiacente("sud", atrio);
 
-        /* pone gli attrezzi nelle stanze prendendoli dal set attrezzi */ 
+        // pone gli attrezzi nelle stanze prendendoli dal set attrezzi 
 		 
 		atrio.addAttrezzo(lanterna);
 		aulaN11.addAttrezzo(osso);
@@ -77,21 +80,29 @@ public class Labirinto {
 
 
 		// il gioco comincia nell'atrio
-        this.entrata = atrio;  
-		this.uscita = biblioteca;
+        this.stanzaIniziale = atrio;  
+		this.stanzaCorrente = atrio;
+		this.stanzaVincente = biblioteca;
     }
+	*/
     
     
-    public Stanza getStanzaIniziale() {
-    	return this.entrata;
+    public Stanza getStanzaCorrente() {
+    	return this.stanzaCorrente;
     }
+	public Stanza getStanzaIniziale() {
+		return this.stanzaIniziale;
+	}
     public Stanza getStanzaVincente() {
-    	return this.uscita;
+    	return this.stanzaVincente;
     }
-    public void setStanzaCorrente(Stanza entrata) {
-    	this.entrata = entrata;
+    public void setStanzaIniziale(Stanza entrata) {
+    	this.stanzaIniziale = entrata;
     }
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.stanzaCorrente = stanzaCorrente;
+	}
 	public void setStanzaVincente(Stanza uscita) {
-		this.uscita = uscita;
+		this.stanzaVincente = uscita;
 	}
 }

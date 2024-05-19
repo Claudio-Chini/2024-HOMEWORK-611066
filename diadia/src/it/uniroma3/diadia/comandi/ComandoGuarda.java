@@ -1,22 +1,17 @@
-package it.uiroma3.diadia.comandi;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Stanza;
 
-public class ComandoAiuto implements Comando {
-	
+public class ComandoGuarda implements Comando {
 	private IO io;
-	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
-	/**
-	 * Stampa informazioni di aiuto.
-	 */
+	private final static String NOME = "guarda";
 	@Override
 	public void esegui(Partita partita) {
-		for(int i=0; i< elencoComandi.length; i++) 
-			io.mostraMessaggio(elencoComandi[i]+" ");
-		io.mostraMessaggio("");
-
+		Stanza stanzaCorrente = partita.getStanzaCorrente();
+		io.mostraMessaggio(stanzaCorrente.getDescrizione());
+		//io.mostraMessaggio(stanzaCorrente.getNome());
 	}
 
 	@Override
@@ -27,14 +22,14 @@ public class ComandoAiuto implements Comando {
 
 	@Override
 	public String getNome() {
-		return "aiuto";
+		return NOME;
 	}
 
 	@Override
 	public String getParametro() {
 		return "";
 	}
-	@Override
+		@Override
 	public void setIO(IO io){
 		this.io = io;
 	}

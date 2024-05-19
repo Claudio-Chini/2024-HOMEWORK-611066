@@ -22,7 +22,7 @@ public class PartitaTest {
 	}
 	public Labirinto labirinto(Stanza entrata, Stanza uscita){
 		this.labirinto = new Labirinto();
-        this.labirinto.setStanzaCorrente(entrata);
+        this.labirinto.setStanzaIniziale(entrata);
         this.labirinto.setStanzaVincente(uscita);
         return this.labirinto;
     }

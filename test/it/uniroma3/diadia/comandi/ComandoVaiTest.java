@@ -1,4 +1,4 @@
-package it.uiroma3.diadia.comandi;
+package it.uniroma3.diadia.comandi;
 
 import static org.junit.Assert.*;
 

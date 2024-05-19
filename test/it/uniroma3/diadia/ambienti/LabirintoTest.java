@@ -22,7 +22,7 @@ public class LabirintoTest {
     }
     public Labirinto labirinto(Stanza entrata, Stanza uscita){
         this.labirinto = new Labirinto();
-        this.labirinto.setStanzaCorrente(entrata);
+        this.labirinto.setStanzaIniziale(entrata);
         this.labirinto.setStanzaVincente(uscita);
         return this.labirinto;
     }
@@ -56,7 +56,7 @@ public class LabirintoTest {
             */
             @Test
             public void testSetEntrata() {  
-                labirinto(null,uscita(new Stanza("uscita"))).setStanzaCorrente(entrata(new Stanza("entrata")));
+                labirinto(null,uscita(new Stanza("uscita"))).setStanzaIniziale(entrata(new Stanza("entrata")));
                 assertEquals(entrata,labirinto.getStanzaIniziale());
             }
 

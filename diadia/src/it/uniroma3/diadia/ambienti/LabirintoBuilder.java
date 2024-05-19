@@ -27,7 +27,7 @@ public class LabirintoBuilder {
 
 	public LabirintoBuilder addStanzaIniziale(String stanzaIniziale) {
 		Stanza i = new Stanza(stanzaIniziale);
-		this.labirinto.setStanzaCorrente(i);
+		this.labirinto.setStanzaIniziale(i);
 		this.AggiornaUltimaStanza(i);
 		return this;
 	}
