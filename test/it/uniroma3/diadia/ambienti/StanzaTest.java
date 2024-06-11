@@ -41,8 +41,8 @@ public class StanzaTest {
          */
         @Test // JUnit4
         public void testImpostaStanzaAdiacenteDirezioneNullaJU4() {
-            Stanza s = stanza("A",null,null); s.impostaStanzaAdiacente(null, stanza("B",null,null));
-            assertEquals(null,s.getStanzaAdiacente("nord"));	
+            Stanza s = stanza("A",null,null); s.impostaStanzaAdiacente("", stanza("B",null,null));
+            assertEquals(null,s.getStanzaAdiacente(Direzione.NORD));	
         }
         
         /* JUnit5
@@ -60,8 +60,8 @@ public class StanzaTest {
         public void testImpostaStanzaAdiacente(){
             
             Stanza stanza_adiacente = new Stanza("B");
-            stanza("A",null,null).impostaStanzaAdiacente("direzione",stanza_adiacente);
-            assertEquals(stanza_adiacente, stanza.getStanzaAdiacente("direzione"));
+            stanza("A",null,null).impostaStanzaAdiacente(Direzione.NORD,stanza_adiacente);
+            assertEquals(stanza_adiacente, stanza.getStanzaAdiacente(Direzione.NORD));
         }
         /**
          *  Test impostaStanzaAdiacente(String direzione, Stanza stanza) con parametro stanza nullo
@@ -69,8 +69,8 @@ public class StanzaTest {
         @Test
         public void testImpostaStanzaAdiacenteNulla(){
             
-            stanza("A",null,null).impostaStanzaAdiacente("direzione", null);
-            assertEquals(null, stanza.getStanzaAdiacente("direzione"));
+            stanza("A",null,null).impostaStanzaAdiacente(Direzione.NORD, null);
+            assertEquals(null, stanza.getStanzaAdiacente(Direzione.NORD));
         }
 
         /**
@@ -99,28 +99,11 @@ public class StanzaTest {
          */
         @Test
         public void testGetStanzaAdiacenteDirezioneNonPresente(){
-            assertEquals(null, stanza("A",null,null).getStanzaAdiacente("direzione"));
+            assertEquals(null, stanza("A",null,null).getStanzaAdiacente(Direzione.NORD));
         }
         
-        /**
-         * Test getStanzaAdiacente(String direzione) nel caso ci siano stanze adiacenti nella direzione specificata    
-         */
-        @Test
-        public void testGetStanzaAdiacenteDirezionePresente(){
-            Stanza stanza_adiacente = new Stanza("B");
-            stanza("A",null,null).impostaStanzaAdiacente("direzione",stanza_adiacente);
-            assertEquals(stanza_adiacente, stanza.getStanzaAdiacente("direzione"));
-        }
+       
 
-        /**
-         * Test getStanzaAdiacente(String direzione) se invocato su una stanza nulla
-         */
-        @SuppressWarnings("null")
-		@Test(expected = NullPointerException.class)
-        public void testGetStanzaAdiacenteStanzaNulla(){
-            Stanza stanzaA = null;
-            stanzaA.getStanzaAdiacente("direzione");
-        }
 
 
 

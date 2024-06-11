@@ -4,7 +4,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando{
 	private IO io;
 	private Attrezzo attrezzo;
 	
@@ -17,6 +17,7 @@ public class ComandoPosa implements Comando {
 		Attrezzo attrezzo_posato = partita.getGiocatore().getBorsa().getAttrezzo(attrezzo);
 		partita.getStanzaCorrente().addAttrezzo(attrezzo_posato);
 		partita.getGiocatore().getBorsa().removeAttrezzo(partita.getGiocatore().getBorsa().getAttrezzo(attrezzo));
+		io.mostraMessaggio("Attrezzo " + attrezzo.getNome() + " posato");
 		
 
 	}
@@ -38,7 +39,7 @@ public class ComandoPosa implements Comando {
 		return this.attrezzo.getNome();
 	}
 	@Override
-	public void setIO(IO io){
+	public void setIo(IO io){
 		this.io = io;
 	}
 

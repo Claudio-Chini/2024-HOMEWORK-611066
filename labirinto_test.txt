@@ -1,0 +1,11 @@
+Stanze:A,B
+Magica:
+Buia:
+Bloccata:  
+Inizio:A
+Vincente:B
+Mago:
+Cane: 
+Strega: 
+Attrezzi:
+Uscite:A sud B, B nord A

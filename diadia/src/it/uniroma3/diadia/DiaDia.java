@@ -1,9 +1,15 @@
 package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
+
+import java.util.List;
+import java.util.Scanner;
+
+
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
 
 
 
@@ -22,7 +28,7 @@ import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
 public class DiaDia {
 
-	static final private String MESSAGGIO_BENVENUTO = ""+
+	static final public String MESSAGGIO_BENVENUTO = ""+
 			"Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n" +
 			"Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"+
 			"I locali sono popolati da strani personaggi, " +
@@ -45,7 +51,7 @@ public class DiaDia {
 		this.partita = new Partita(labirinto);
 	}
 
-	public void gioca() {
+	public void gioca() throws Exception {
 		String istruzione; 
 		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		do{
@@ -59,35 +65,42 @@ public class DiaDia {
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
-	private boolean processaIstruzione(String istruzione) {
+	private boolean processaIstruzione(String istruzione) throws Exception{
 		Comando comandoDaEseguire;
-		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica(this.io);
-		comandoDaEseguire = factory.costruisciComando(istruzione);
+		FabbricaDiComandiRiflessiva factory = new FabbricaDiComandiRiflessiva(this.io);
+	
+		try {
+			comandoDaEseguire = factory.costruisciComando(istruzione);
+		}catch (ClassNotFoundException cne) {
+			comandoDaEseguire = factory.costruisciComando("NonValido");
+		}catch (NullPointerException npe) {
+			comandoDaEseguire = factory.costruisciComando("NonValido");
+		}
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
 			io.mostraMessaggio("Hai vinto!");
-		if (this.partita.getGiocatore().getCfu() == 0  )
+		if (this.partita.getCfu() <= 0)
 			io.mostraMessaggio("Hai esaurito i CFU...");
 		return this.partita.isFinita();
 	}
+	
 	// implementazioni dei comandi dell'utente spostate nelle rispettive classi
 
 	public Partita getPartita(){
 		return this.partita;
 	}
 
-	public static void main(String[] argc) {
-		IO io = new IOConsole();
+	public static void main(String[] argc) throws Exception {
+		Scanner scanner = new Scanner(System.in);
+		IO io = new IOConsole(scanner);
 
-		Labirinto labirinto = new LabirintoBuilder()
-		.addStanzaIniziale("Atrio")
-		.addAttrezzo("lanterna", 2)
-		.addStanzaVincente("Biblioteca")
-		.addAdiacenza("Atrio",  "Biblioteca","ovest")
-		.getLabirinto();
-
+		Labirinto labirinto = 	 Labirinto.newBuilder("labirinto.txt").getLabirinto();
+	 
+			
+	
 
 		DiaDia gioco = new DiaDia( io,labirinto);
-		gioco.gioca()    ;
+		gioco.gioca();
+		scanner.close();
 	}
 }

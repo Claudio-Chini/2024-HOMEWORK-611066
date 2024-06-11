@@ -22,12 +22,7 @@ public class Partita {
 	private boolean finita;
 	private Giocatore giocatore;
 	
-	public Partita(){
-		this.labirinto = new Labirinto();
 
-		this.finita = false;
-		this.giocatore = new Giocatore();
-	}
 	public Partita(Labirinto labirinto){
 		this.labirinto = labirinto;
 		this.finita = false;
@@ -35,13 +30,6 @@ public class Partita {
 	
 	}
 
-	public Partita(Labirinto labirinto,Giocatore giocatore){
-		this.labirinto = labirinto;
-		this.finita = false;
-		this.giocatore = giocatore;
-	}
-
- 
 	public Stanza getStanzaVincente() {
 		return this.labirinto.getStanzaVincente();
 	}

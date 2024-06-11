@@ -8,13 +8,13 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaBloccataTest extends StanzaTest{
 	
-	private String direzioneBloccata = "est";
+	private Direzione direzioneBloccata = Direzione.EST;
 	private Attrezzo attrezzoSpeciale = new Attrezzo("Passepartout");
 	
 	public StanzaBloccata stanzaBloccata(String nome){
 		return new StanzaBloccata(nome,this.direzioneBloccata,this.attrezzoSpeciale.getNome());
 	}
-	public StanzaBloccata stanzaBloccata(String nome,String direzioneBloccata_,Attrezzo attrezzoSpeciale_){
+	public StanzaBloccata stanzaBloccata(String nome,Direzione direzioneBloccata_,Attrezzo attrezzoSpeciale_){
 		return new StanzaBloccata(nome,direzioneBloccata_,attrezzoSpeciale_.getNome());
 	}
 

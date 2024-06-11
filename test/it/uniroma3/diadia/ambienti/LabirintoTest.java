@@ -2,75 +2,53 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.FileNotFoundException;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import it.uniroma3.diadia.FormatoFileNonValidoException;
+import it.uniroma3.diadia.Partita;
 
 
 
 public class LabirintoTest {
+
+    private Partita partita;
     private Labirinto labirinto;
-    Stanza entrata;
-    Stanza uscita;
 
-    public Stanza entrata(Stanza entrata){
-        this.entrata = entrata;
-        return this.entrata;
-    }
-    public Stanza uscita(Stanza uscita){
-        this.uscita = uscita;
-        return this.uscita;
-    }
-    public Labirinto labirinto(Stanza entrata, Stanza uscita){
-        this.labirinto = new Labirinto();
-        this.labirinto.setStanzaIniziale(entrata);
-        this.labirinto.setStanzaVincente(uscita);
-        return this.labirinto;
+	@Before
+	public void setUp()  throws FileNotFoundException , FormatoFileNonValidoException{
+		this.labirinto = Labirinto.newBuilder("labirinto_test.txt").getLabirinto();
+		this.partita = new Partita(this.labirinto);
+	
+	}
+
+    @Test
+    public void testGetStanzaVincente() {
+        assertEquals("B", this.partita.getLabirinto().getStanzaVincente().getNome());
     }
 
+    @Test
+    public void testGetStanzaCorrente() {
+        assertEquals("A", this.partita.getLabirinto().getStanzaCorrente().getNome());
+    }
 
-// test getEntrata()
-    
-            /**
-            ** Test getEntrata() 
-            */
-            @Test
-            public void testGetEntrata() { 
-                entrata(new Stanza("e"));
-                labirinto(entrata,null); 
-                assertEquals(entrata,labirinto.getStanzaIniziale());
-            }
-// test getUscita()
-        
-            /**
-            ** Test getUscita() 
-            */
-            @Test
-            public void testGetUscita() {  
-                labirinto(new Stanza("entrata"),uscita(new Stanza("u")));
-                assertEquals(uscita,labirinto.getStanzaVincente());
-            }
-// test setEntrata()
-            
-            /**
-            ** Test setEntrata() 
-            */
-            @Test
-            public void testSetEntrata() {  
-                labirinto(null,uscita(new Stanza("uscita"))).setStanzaIniziale(entrata(new Stanza("entrata")));
-                assertEquals(entrata,labirinto.getStanzaIniziale());
-            }
+    @Test
+    public void testSetStanzaCorrente() {
+        Stanza stanza = new Stanza("C");
+        this.partita.getLabirinto().setStanzaCorrente(stanza);
+        assertEquals("C", this.partita.getLabirinto().getStanzaCorrente().getNome());
+    }
 
-// test setUscita()
-                
-                /**
-                ** Test setUscita() 
-                */
-                @Test
-                public void testSetUscita() {  
-                    labirinto(new Stanza("entrata"),null).setStanzaVincente(uscita(new Stanza("uscita")));
-                    assertEquals(uscita,labirinto.getStanzaVincente());
-                }
+    @Test
+    public void testSetStanzaVincente() {
+        Stanza stanza = new Stanza("D");
+        this.partita.getLabirinto().setStanzaVincente(stanza);
+        assertEquals("D", this.partita.getLabirinto().getStanzaVincente().getNome());
+    }
 
-            
+
+
 
 }
