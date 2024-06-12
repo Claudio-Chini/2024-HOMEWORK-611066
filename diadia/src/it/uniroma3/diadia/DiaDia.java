@@ -3,8 +3,6 @@ package it.uniroma3.diadia;
 import it.uniroma3.diadia.comandi.Comando;
 
 import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
-
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -76,7 +74,11 @@ public class DiaDia {
 		}catch (NullPointerException npe) {
 			comandoDaEseguire = factory.costruisciComando("NonValido");
 		}
-		comandoDaEseguire.esegui(this.partita);
+		try{
+			comandoDaEseguire.esegui(this.partita);
+		}catch (Exception e) {
+			io.mostraMessaggio("Comando non eseguito");
+		}
 		if (this.partita.vinta())
 			io.mostraMessaggio("Hai vinto!");
 		if (this.partita.getCfu() <= 0)
@@ -93,12 +95,7 @@ public class DiaDia {
 	public static void main(String[] argc) throws Exception {
 		Scanner scanner = new Scanner(System.in);
 		IO io = new IOConsole(scanner);
-
 		Labirinto labirinto = 	 Labirinto.newBuilder("labirinto.txt").getLabirinto();
-	 
-			
-	
-
 		DiaDia gioco = new DiaDia( io,labirinto);
 		gioco.gioca();
 		scanner.close();

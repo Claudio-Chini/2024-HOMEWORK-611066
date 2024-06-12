@@ -2,7 +2,6 @@ package it.uniroma3.diadia.comandi;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Scanner;
 
@@ -21,7 +20,6 @@ public class ComandoPrendiTest {
 	private Partita partita;
 	private Attrezzo attrezzo;
 	private Attrezzo attrezzoPesante;
-	private Attrezzo attrezzoNull;
 	private Comando comando;
 	private IO io;
 	Labirinto labirinto;
@@ -38,7 +36,6 @@ public class ComandoPrendiTest {
 		partita = new Partita(labirinto);
 		attrezzo = new Attrezzo("martello", 2);
 		attrezzoPesante = new Attrezzo("incudine", 11);
-		attrezzoNull = null;
 		comando = new ComandoPrendi();
 		io = new IOConsole(new Scanner(System.in));
 		comando.setIo(io);

@@ -1,9 +1,9 @@
 package it.uniroma3.diadia.comandi;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,19 +18,16 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.fixture.Fixture;
 
 public class ComandoVaiTest {
 
 
-	private Comando vai;
-
 	Labirinto labirinto;
 	List<String> comandi ;
 	Fixture fixture;
+	IO io = new IOConsole(new Scanner(System.in));
 
 	@Before
 	public void setUp() throws Exception {
@@ -56,32 +53,44 @@ public class ComandoVaiTest {
 	}
 
 	@Test 
-	public void testVaiDirezioneInesistente() throws Exception{
+	public void testVaiDirezioneInesistente() throws FileNotFoundException, FormatoFileNonValidoException  {
+		Partita p = new Partita(Labirinto.newBuilder("labirinto_test.txt").getLabirinto());
+		ComandoVai vai = new ComandoVai();
+		vai.setParametro("nord");
+		vai.setIo(io);
+		vai.esegui(p);
+		assertEquals("A", p.getLabirinto().getStanzaCorrente().getNome());
+	
+	}
+
+	
+	@Test 
+	public void testVaiSenzaDirezione() throws Exception {
+		Partita p = new Partita(Labirinto.newBuilder("labirinto_test.txt").getLabirinto());
+		ComandoVai vai = new ComandoVai();
+		vai.setIo(io);
+		vai.esegui(p);
+		assertEquals("A", p.getLabirinto().getStanzaCorrente().getNome());
+	}
+
+
+
+	@Test
+	public void testVaiPartita() throws Exception {
 		comandi.clear();
+		comandi.add("vai sud");
 		comandi.add("vai nord");
 		IOSimulator io = Fixture.simulazionePartitaTest(comandi);
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
-		assertEquals("A", io.nextMessaggio());
+		assertEquals("B", io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
-		assertEquals("Direzioneinesistente", io.nextMessaggio());
-
-	
+		assertEquals("Hai vinto!", io.nextMessaggio());
 	}
 
-	
-	
-	@Test 
-	public void testVaiSenzaDirezione() throws Exception {
-		comandi.clear();
-		comandi.add("vai");
-		IOSimulator io = Fixture.simulazionePartitaTest(comandi);
-		assertTrue(io.hasNextMessaggio());
-		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertEquals("", io.nextMessaggio());
-	}
+
+
 	
 }
 

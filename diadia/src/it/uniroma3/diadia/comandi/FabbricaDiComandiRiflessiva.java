@@ -11,6 +11,7 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 		this.io = io;
 	}
 
+	@SuppressWarnings("deprecation")
 	public Comando costruisciComando(String istruzione) throws Exception {
 		Scanner scannerDiParole = new Scanner(istruzione); // es. ‘vai sud’
 		String nomeComando = null; // es. ‘vai’
@@ -32,6 +33,7 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 			}
 			
 			comando.setIo(io);
+			scannerDiParole.close();
 
 	
 		

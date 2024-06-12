@@ -37,6 +37,8 @@ public enum Direzione {
 
 
 	public static Direzione buildDirezione(String nome) {
+		if(nome==null)
+			return null;	
 		switch (nome) {
 		case "nord":
 			return Direzione.NORD;

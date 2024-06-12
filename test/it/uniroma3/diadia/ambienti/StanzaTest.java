@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.junit.Test;
 
@@ -148,7 +147,8 @@ public class StanzaTest {
          * Test removeAttrezzo(Attrezzo attrezzo) se invocato su una stanza nulla
          */
        
-		@Test(expected = NullPointerException.class)
+		@SuppressWarnings("null")
+        @Test(expected = NullPointerException.class)
         public void testRemoveAttrezzoStanzaNulla(){
             Stanza stanzaA = null;
             stanzaA.removeAttrezzo(new Attrezzo("attrezzo", 1));

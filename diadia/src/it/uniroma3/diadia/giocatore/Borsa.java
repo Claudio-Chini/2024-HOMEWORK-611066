@@ -1,16 +1,7 @@
 package it.uniroma3.diadia.giocatore;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 import it.uniroma3.diadia.Configuratore;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
